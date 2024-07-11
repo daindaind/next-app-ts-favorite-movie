@@ -1,11 +1,10 @@
-import {movieData} from '../data/data';
+import { fetchMovieData } from '@/api';
 import FirstUI from "@/components/home/FirstUI";
 import SecondUI from "@/components/home/SecondUI";
 import ThirdUI from "@/components/home/ThirdUI";
-import RootLayout from './layout';
 
-export default function Home() {
-  const data = movieData.products;
+export default async function Home() {
+  const data = await fetchMovieData();
 
   return (
     <>
