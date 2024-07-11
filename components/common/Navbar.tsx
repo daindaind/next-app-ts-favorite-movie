@@ -2,13 +2,16 @@
 
 import { PAGE_URL } from "@/constants/router";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { RiMovie2Line } from "react-icons/ri";
 
-function Navbar() {
-   const currentPath = '';
+interface NavbarProps {}
+
+function Navbar({}: NavbarProps) {
+  const currentPath = usePathname();
   return (
-    <ul className="flex flex-row justify-center align-middle h-15 p-5 bg-light-white">
+    <ul className="flex flex-row justify-center align-middle h-15 p-5">
       <Link href={PAGE_URL.BASE}>
         <div  className="flex flex-row gap-2 items-center">
         <RiMovie2Line size={30}/>

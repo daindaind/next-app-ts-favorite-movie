@@ -31,7 +31,7 @@ const TextInput = ({ placeholder, onChange }: TextInputProps) => {
   return (
     <textarea
       cols={3}
-      className="resize-none border-2 text-sm border-stone-200 rounded-lg p-3 h-full overflow-scroll overflow-x-hidden focus:outline-none"
+      className="bg-white resize-none border-2 text-sm border-stone-200 rounded-lg p-3 h-full overflow-scroll overflow-x-hidden focus:outline-none"
       ref={textareaRef}
       placeholder={placeholder}
       onChange={onChange}
