@@ -1,5 +1,3 @@
-'use client'
-
 interface ButtomProps {
    label: string;
    onClick?: (e: any) => void;
@@ -9,7 +7,7 @@ interface ButtomProps {
 const Button = ({ label, onClick, type }: ButtomProps) => {
    return (
      <button
-       className="p-2 bg-cherry-pink border-none rounded-md transition ease-in delay-75 hover:cursor-pointer hover:scale-90 transform-gpu"
+       className="p-2 bg-cherry-pink border-none rounded-md transition ease-in delay-75 hover:cursor-pointer hover:scale-95 transform-gpu"
        onClick={onClick}
        type={type}
      >
