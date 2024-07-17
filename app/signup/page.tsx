@@ -16,7 +16,7 @@ async function create(formData: FormData) {
    };
    
    try {
-      const res = await fetch(`http://localhost:3000${API_URL.SINGUP}`, {
+      const res = await fetch(`http://localhost:3000/${API_URL.SINGUP}`, {
          method: 'POST',
          headers: {
             'Content-Type': "application/json"
@@ -76,7 +76,7 @@ function SignupPage() {
             </div>
             <div className='flex flex-row justify-center gap-3 mt-5'>
                <p className='self-center text-sm text-gray-700 mt-[2px]'>이미 계정이 있으신가요?</p>
-               <Link href="/login"><span className='text-sm text-gray-700 font-semibold hover:text-cherry-pink underline'>로그인 하러가기</span></Link>
+               <Link href={PAGE_URL.LOGIN}><span className='text-sm text-gray-700 font-semibold hover:text-cherry-pink underline'>로그인 하러가기</span></Link>
             </div>
             <div className='flex flex-col w-full mt-10'>
                <Button label="회원가입" type="submit" />

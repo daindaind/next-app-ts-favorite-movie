@@ -1,5 +1,4 @@
-export const movieData = {
-   "products": [
+export const movieData =  [
      {
        "id": 1,
        "title": "뷰티인사이드",
@@ -151,5 +150,5 @@ export const movieData = {
        "creator_email": "1904vv@gmail.com"
      }
    ]
- }
+
  
