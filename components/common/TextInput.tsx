@@ -3,11 +3,12 @@
 import { useEffect, useRef } from "react";
 
 interface TextInputProps {
+  name: string;
    placeholder: string;
-   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const TextInput = ({ placeholder, onChange }: TextInputProps) => {
+const TextInput = ({ placeholder, onChange, name }: TextInputProps) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
 
   const handleInput = () => {
@@ -30,6 +31,7 @@ const TextInput = ({ placeholder, onChange }: TextInputProps) => {
 
   return (
     <textarea
+      name={name}
       cols={3}
       className="bg-white resize-none border-2 text-sm border-stone-200 rounded-lg p-3 h-full overflow-scroll overflow-x-hidden focus:outline-none"
       ref={textareaRef}

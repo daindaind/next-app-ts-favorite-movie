@@ -10,6 +10,7 @@ function middleware(request: NextRequest) {
 
    // accessToken 유무에 따른 로그인 상태 전달
    if (accessToken) {
+      requestHeaders.set('token', accessToken);
       requestHeaders.set('x-logged-in', 'true');
    } else {
       requestHeaders.set('x-logged-in', 'false');

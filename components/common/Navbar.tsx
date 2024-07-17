@@ -10,7 +10,6 @@ function Navbar({}: NavbarProps) {
   const headersList = headers();
   const currentPath = headersList.get('x-pathname') || "";
   const isLoggedIn = headersList.get('x-logged-in') === 'true';
-  console.log('로그인 됨: ' ,isLoggedIn)
 
   return (
     <ul className="flex flex-row justify-center align-middle h-15 p-5">
