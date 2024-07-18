@@ -1,6 +1,5 @@
 import { API_URL } from "@/constants/router";
 import { PostType } from "@/types/data";
-import getColors from "@/utils/getColors";
 import getHeaders from "@/utils/header";
 import Image from "next/image";
 
@@ -19,15 +18,13 @@ async function MovieDetailPage({params}: MovieDetailPageProps) {
 			headers: authorization
 		});
 		data = await res.json();
-		console.log('받은 값: ', data);
+		console.log('요청 결과: ', data);
 	} catch (e) {
 		console.error(e);
 	}
 
-	const movieColor = getColors(data.color);
-
 	return (
-		<div className="flex flex-col justify-center align-middle h-4/5 m-5 gap-10">
+		<div className="flex flex-col align-middle m-5 gap-10 h-screen p-10">
 			<div className="flex flex-col self-center w-4/5">
 				<div className="flex flex-row gap-5">
 					{data.images[0] ? 
@@ -37,13 +34,13 @@ async function MovieDetailPage({params}: MovieDetailPageProps) {
 						<p className=" inline-block text-2xl text-default-text font-bold p-1">{data.title}</p>
 						<p className=" inline-block text-sm text-default-text p-1">{data.date}</p>
 						<div className="flex flex-row gap-2">
-							<p className="self-center text-sm font-semibold text-gray-06 p-1">영화관 위치</p>
+							<p className="self-center text-sm font-semibold text-gray-06 p-1">위치</p>
 							<p className="inline-block text-sm text-default-text p-1">{data.address}</p>
 							<p className="inline-block text-sm text-default-text p-1">({data.latitude}, {data.longitude})</p>
 						</div>
 						<div className="flex flex-row items-center gap-2">
-							<p className="self-center text-sm font-semibold text-gray-06 p-1">영화 대표 색상</p>
-							<div className={`w-[10px] h-[10px] bg-[${movieColor}] rounded-full`} />
+							<p className="self-center text-sm font-semibold text-gray-06 p-1">작품 대표 색상</p>
+							{data.color && <div className={`w-[10px] h-[10px] bg-${data.color} rounded-full`} />}
 						</div>
 					</div>
 				</div>

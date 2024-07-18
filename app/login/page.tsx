@@ -3,9 +3,9 @@ import Input from '@/components/common/Input';
 import { API_URL, PAGE_URL } from '@/constants/router';
 import { cookies, headers } from 'next/headers';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import React from 'react';
 
+// TODO: 로그인 후 redirect 처리
 async function create(formData: FormData) {
 	'use server';
 	const headersList = headers();
@@ -34,7 +34,6 @@ async function create(formData: FormData) {
 			cookieStore.set('accessToken', accessToken);
 			cookieStore.set('refreshToken', refreshToken);
 
-			redirect(`${PAGE_URL.BASE}`);
 		} catch (e) {
 			console.error('로그인 실패: ', e);
 		}

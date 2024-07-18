@@ -25,6 +25,8 @@ async function MoviesPage({}: MoviesPageProps) {
 	} catch (e) {
 		console.error(e);
 	}
+
+	console.log(authorization);
    
 	return (
 		<div className="flex flex-col justify-center items-center mt-10 pb-[100px]">

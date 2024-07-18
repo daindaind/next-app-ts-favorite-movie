@@ -10,12 +10,16 @@ function decodeToken(token: string) {
 }
 
 // 토큰 만료시간 확인
+// 만료될 시간으로부터 2분 전일때 true
 function isTokenExpiringSoon(token: string) {
 	const decoded = decodeToken(token);
 	const exp = decoded.exp;
 	const now = Math.floor(Date.now() / 1000);
 	const remainingTime = exp - now;
 	const threshold = 2 * 60; // 2분 (120초)
+
+	console.log("remainingTime", remainingTime);
+	console.log("threshold", threshold);
 	return remainingTime <= threshold;
 }
  

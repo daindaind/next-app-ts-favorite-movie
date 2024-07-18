@@ -6,6 +6,7 @@ import { DatePicker } from "@nextui-org/date-picker";
 import { headers } from "next/headers";
 import { API_URL } from "@/constants/router";
 
+// TODO: post 이후 다른 페이지로 이동
 async function create(formData: FormData) {
 	'use server';
 	const headersList = headers();
@@ -41,8 +42,6 @@ async function create(formData: FormData) {
 				})
 			});
 			console.log(res);
-			// return res;
-			// redirect(`${PAGE_URL.MOVIES}`);  // TODO 왜 안 될까ㅜㅜ
 		} catch (e) {
 			console.error(e);
 		}
@@ -58,28 +57,28 @@ function PostPage() {
 					<p className="text-gray-01 text-sm font-normal">위도</p>
 					<Input
 						name="latitude"
-						placeholder="영화관 위도를 입력해주세요."
+						placeholder="관람 장소의 위도를 입력해주세요."
 					/>
 				</div>
 				<div className="flex flex-col gap-3 w-full">
 					<p className="text-gray-01 text-sm font-normal">경도</p>
 					<Input
 						name='longitude'
-						placeholder="영화관 경도를 입력해주세요."
+						placeholder="관람 장소의 경도를 입력해주세요."
 					/>
 				</div>
 				<div className="flex flex-col gap-3 w-full">
 					<p className="text-gray-01 text-sm font-normal">별점</p>
 					<Input
 						name='score'
-						placeholder="본인의 영화 평점을 입력해주세요."
+						placeholder="본인의 평점을 입력해주세요."
 					/>
 				</div>
 				<div className="flex flex-col gap-3 w-full">
 					<p className="text-gray-01 text-sm font-normal">대표 색상</p>
 					<Input
 						name='color'
-						placeholder="영화를 대표하는 색상을 지정해주세요. (Hex Code)"
+						placeholder="작품을 대표하는 색상을 지정해주세요. (Hex Code)"
 					/>
 				</div>
 				<div className="flex flex-col gap-3 w-full">
@@ -87,27 +86,28 @@ function PostPage() {
 					<DatePicker name='date' label="Birth date" className="max-w-[284px] rounded-md border-2 border-stone-200 p-2 text-sm text-gray-04" />
 				</div>
 				<div className="flex flex-col gap-3 w-full">
-					<p className="text-gray-01 text-sm font-normal">영화 제목</p>
+					<p className="text-gray-01 text-sm font-normal">제목</p>
 					<Input
 						name="title"
-						placeholder="영화 제목을 입력해주세요."
+						placeholder="작품 제목을 입력해주세요."
 					/>
 				</div>
 				<div className="flex flex-col gap-3 w-full">
-					<p className="text-gray-01 text-sm font-normal">영화관 위치</p>
+					<p className="text-gray-01 text-sm font-normal">위치</p>
 					<Input
 						name="address"
-						placeholder="영화관 주소를 입력해주세요."
+						placeholder="작품을 관람한 주소를 입력해주세요."
 					/>
 				</div>
 				<div className="flex flex-col gap-3 w-full">
-					<p className="text-gray-01 text-sm font-normal">영화 줄거리</p>
+					<p className="text-gray-01 text-sm font-normal">작품 줄거리</p>
 					<TextInput
 						name="description"
-						placeholder="영화 줄거리를 입력해주세요."
+						placeholder="줄거리를 입력해주세요."
 					/>
 				</div>
 				<div className="flex flex-row gap-5">
+					{/* TODO: 이미지 업로드 하기 */}
 					{/* {imgUrl ? (
             <Image className="object-cover bg-white rounded-md" width={250} height={360} alt="Poster" src={imgUrl}/>
           ) : (
