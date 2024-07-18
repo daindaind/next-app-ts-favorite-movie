@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import MoviePoster from '../movies/MoviePoster';
 import { MovieType } from '@/types/data'
+import HomeMoviePoster from './MoviePoster';
 
 interface FirstUIProps {
    data: MovieType[];
@@ -15,13 +15,13 @@ function FirstUI({data}: FirstUIProps) {
       <h3 className='text-xl font-medium text-default-text mt-3 animate-slideDown'>나만의 모든 영화, 드라마, 애니메이션</h3>
       <div className='flex flex-row gap-5 mt-20 w-[990px] h-[490px]'>
          <div className='flex justify-center items-center bg-white p-[30px] rounded-[20px] w-[970px] h-[470px] z-[300] mt-[30px] shadow-lg animate-slideUp'>
-            <MoviePoster movieData={data[0]} onClick={() => {}} />
+            <HomeMoviePoster movieData={data[0]} onClick={() => {}} />
          </div>
          <div className='flex justify-center items-center bg-white p-[30px] rounded-[20px] w-[970px] h-[470px] z-[300] shadow-lg animate-slideUp'>
-            <MoviePoster movieData={data[1]} onClick={() => {}} />
+            <HomeMoviePoster movieData={data[1]} onClick={() => {}} />
          </div>
          <div className='flex justify-center items-center bg-white p-[30px] rounded-[20px] w-[970px] h-[470px] mt-[30px] z-[300] shadow-lg animate-slideUp'>
-            <MoviePoster movieData={data[2]} onClick={() => {}} />
+            <HomeMoviePoster movieData={data[2]} onClick={() => {}} />
          </div>
       </div>
       <div className='absolute top-[400px] flex flex-row w-full h-[800px] rounded-tl-[180px] rounded-tr-[180px] bg-gradient-to-b from-cherry-pink'/>

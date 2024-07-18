@@ -24,6 +24,11 @@ module.exports = {
         "gray-06": "#262f3e",
         "gray-07": "#181d24",
         "gray-08": "#151825",
+        "red": "#FF0060",
+        "blue": "#0079FF",
+        "green": "#00DFA2",
+        "purple": "#AF47D2",
+        "yellow": "#F6FA70"
       },
       keyframes: {
         slideDown: {

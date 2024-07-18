@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useRef } from 'react'
-import MoviePoster from '../movies/MoviePoster';
 import useIntersectionObserver from '@/hooks/useIntersectionObsever';
 import { MovieType } from '@/types/data';
+import HomeMoviePoster from './MoviePoster';
 
 interface SecondUIProps {
    data: MovieType[];
@@ -17,7 +17,7 @@ function SecondUI({data}: SecondUIProps) {
       <h1 className={isInViewport ? 'text-5xl font-bold text-default-text mt-20 z-[100px] animate-slideUp' : ""}>나만 알고 싶은 작품을 소개하기.</h1>
       <h3 className={isInViewport ? 'text-xl font-medium text-default-text mt-3 mb-20 z-[100] animate-slideUp': ""}>내가 좋아하는 영화/드라마를 다른 사람과 공유해보세요</h3>
       <div className='relative z-[100] mb-[300px]'>
-         <MoviePoster movieData={data[4]}/>
+         <HomeMoviePoster movieData={data[4]}/>
          <div className={isInViewport ? ' bg- absolute bottom-[250px] left-[-200px] z-[200] animate-slideUp' : '' }>
             <div className='relative bg-cherry-pink rounded-3xl p-5 w-[200] m-6 text-default-text text-base font-medium text-center shadow-md'>
                <p className='bg-cherry-pink text-light-white whitespace-pre-wrap font-normal'>이 영화에 대해 다른 사람과{"\n"}얘기하고 싶어 🤔</p>
