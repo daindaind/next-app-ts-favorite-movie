@@ -5,11 +5,11 @@ import { movieData } from '@/data/data';
 
 export default async function Home() {
 
-  return (
-    <>
-        <FirstUI data={movieData}/>
-        <SecondUI data={movieData}/>
-        <ThirdUI data={movieData}/>
-    </>
-  );
+	return (
+		<>
+			<FirstUI data={movieData}/>
+			<SecondUI data={movieData}/>
+			<ThirdUI data={movieData}/>
+		</>
+	);
 }
