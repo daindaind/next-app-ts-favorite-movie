@@ -1,41 +1,41 @@
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { API_URL, PAGE_URL } from '@/constants/router';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
 async function create(formData: FormData) {
   'use server'
+  const headersList = headers();
+  const authorization = headersList.get('authorization');
   const cookieStore = cookies();
 
   const data = {
      email: formData.get('email'),
      password: formData.get('password'),
   };
-  
-  try {
-     const res = await fetch(`http://localhost:3000/${API_URL.LOGIN}`, {
-        method: 'POST',
-        headers: {
-           'Content-Type': "application/json"
-        },
-        body: JSON.stringify({
-           email: String(data.email),
-           password: String(data.password)
-        })
-     });
-  
-    const responseData = await res.json();
-    const accessToken = responseData.accessToken;
-    const refreshToken = responseData.refreshToken;
-    cookieStore.set('accessToken', accessToken);
-    cookieStore.set('refreshToken', refreshToken);
 
-    redirect(`${PAGE_URL.BASE}`);
-  } catch (error) {
-     console.error('Signup failed:', error);
+  if (authorization) {
+   try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${API_URL.LOGIN}`, {
+         method: 'POST',
+         headers: JSON.parse(authorization),
+         body: JSON.stringify({
+            email: String(data.email),
+            password: String(data.password)
+         })
+      });
+      console.log(res);
+      const responseData = await res.json();
+      const accessToken = responseData.accessToken;
+      const refreshToken = responseData.refreshToken;
+      cookieStore.set('accessToken', accessToken);
+      cookieStore.set('refreshToken', refreshToken);
+     } catch (e) {
+      console.error('로그인 실패: ', e);
+     }
   }
 };
 

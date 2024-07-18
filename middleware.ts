@@ -10,9 +10,17 @@ function middleware(request: NextRequest) {
 
    // accessToken 유무에 따른 로그인 상태 전달
    if (accessToken) {
-      requestHeaders.set('token', accessToken);
+      const authObject = {
+         'Content-Type': "application/json",
+         'Authorization': `Bearer ${accessToken}`
+      };
+      requestHeaders.set('authorization', JSON.stringify(authObject));
       requestHeaders.set('x-logged-in', 'true');
    } else {
+      const authObject = {
+         'Content-Type': "application/json"
+      };
+      requestHeaders.set('authorization', JSON.stringify(authObject));
       requestHeaders.set('x-logged-in', 'false');
    }
 

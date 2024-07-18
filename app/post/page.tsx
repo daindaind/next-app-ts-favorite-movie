@@ -2,38 +2,46 @@ import React from "react";
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import TextInput from "@/components/common/TextInput";
-import { postArticle } from "@/api/post";
 import { DatePicker } from "@nextui-org/date-picker";
+import { headers } from "next/headers";
+import { API_URL } from "@/constants/router";
 
 async function create(formData: FormData) {
   'use server'
+  const headersList = headers();
+  const authorization = headersList.get('authorization');
 
   const postData = {
     latitude: formData.get('latitude'),
     longitude: formData.get('longitude'),
     color: formData.get('color'),
-    address: formData.get('adress'),
+    address: formData.get('address'),
     title: formData.get('title'),
     description: formData.get('description'),
-    date: formData.get('data'),
+    date: formData.get('date'),
     score: formData.get('score'),
     imageUris: formData.get('imageUrls'),
   }
 
-  if (postData) {
+  if (postData && authorization) {
     try {
-      const res = await postArticle({
-        latitude: String(formData.get('latitude')),
-        longitude: String(formData.get('longitude')),
-        color: String(formData.get('color')),
-        address: String(formData.get('address')),
-        title: String(formData.get('title')),
-        description: String(formData.get('description')),
-        date: String(formData.get('date')),
-        score: Number(formData.get('score')),
-        imageUris: [],  // TODO: 실제 url 리스트 필요
-      });
-      console.log(res);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${API_URL.POSTS}`, {
+            method: 'POST',
+            headers: JSON.parse(authorization),
+            body: JSON.stringify({
+              latitude: String(postData.latitude),
+              longitude: String(postData.longitude),
+              color: String(postData.color),
+              address: String(postData.address),
+              title: String(postData.title),
+              description: String(postData.description),
+              date: String(postData.date),
+              score: Number(postData.score),
+              imageUris: [],  // TODO: 실제 url 리스트 필요
+            })
+        });
+        console.log(res);
+        // return res;
       // redirect(`${PAGE_URL.MOVIES}`);  // TODO 왜 안 될까ㅜㅜ
     } catch (e) {
       console.error(e);

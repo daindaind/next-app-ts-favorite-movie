@@ -1,9 +1,10 @@
 import Button from '@/components/common/Button'
 import Input from '@/components/common/Input'
-import { API_URL, PAGE_URL } from '@/constants/router'
+import { PAGE_URL } from '@/constants/router'
 import Link from 'next/link'
 import React from 'react'
 import { redirect } from 'next/navigation'
+import { signup } from '@/api/auth'
 
 async function create(formData: FormData) {
    'use server'
@@ -14,27 +15,18 @@ async function create(formData: FormData) {
       email: formData.get('email'),
       password: formData.get('password'),
    };
-   
+
    try {
-      const res = await fetch(`http://localhost:3000/${API_URL.SINGUP}`, {
-         method: 'POST',
-         headers: {
-            'Content-Type': "application/json"
-         },
-         body: JSON.stringify({
-            email: String(data.email),
-            password: String(data.password)
-         })
-      });
-   
+      const res = await signup({
+         email: String(data.email),
+         password: String(data.password)
+      })
       if (res.status === 200) {
          redirect(`${PAGE_URL.LOGIN}`);
       }
-   } catch (error) {
-      console.error('Signup failed:', error);
+   } catch (e) {
+      console.error(e);
    }
-
-   console.log(data);
 };
 
 function SignupPage() {
