@@ -51,7 +51,7 @@ async function create(formData: FormData) {
 
 function PostPage() {
 	return (
-		<form className="flex flex-col align-middle justify-center gap-7 p-7" action={create} >
+		<form className="flex flex-col align-middle justify-center gap-7 p-7 pb-[100px]" action={create} >
 			<div className="flex flex-col gap-7 w-4/5 self-center">
 				<h2 className="text-default-text text-3xl font-light">당신이 좋아하는 작품을 공유해주세요.</h2>
 				<div className="flex flex-col gap-3 w-full">

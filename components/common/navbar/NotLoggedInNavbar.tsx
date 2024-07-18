@@ -23,10 +23,6 @@ function NotLoggedInNavbar() {
 				<Link href={PAGE_URL.BASE} className={currentPath === PAGE_URL.BASE ? 
 					"font-bold text-cherry-pink no-underline" : "flex font-medium text-default-text no-underline"}>홈</Link>
 			</li>
-			<li>
-				<Link href={PAGE_URL.SEARCH} className={currentPath === PAGE_URL.SEARCH ? 
-					"font-bold text-cherry-pink no-underline" : "flex font-medium text-default-text no-underline"}>찾아보기</Link>
-			</li>
 		</div>
 	);
 }

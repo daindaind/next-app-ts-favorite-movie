@@ -1,8 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PAGE_URL } from "./constants/router";
+import { API_URL, PAGE_URL } from "./constants/router";
+import { isTokenExpiringSoon } from "./utils/token";
+import { cookies } from "next/headers";
 
-function middleware(request: NextRequest) {
-	const accessToken = request.cookies.get('accessToken')?.value;
+async function getNewAccessToken(refreshToken: string) {
+	const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${API_URL.REFRESH}`, {
+	  method: 'GET',
+	  headers: {
+		 'Content-Type': 'application/json',
+		 'Authorization': `Bearer ${refreshToken}`
+	  }
+	});
+ 
+	if (!response.ok) {
+	  throw new Error('Failed to refresh access token');
+	}
+ 
+	const data = await response.json();
+	return data;
+};
+
+// 로그인 되어 있어야 접근할 수 있는 페이지
+const protectedRoutes = [`${PAGE_URL.MOVIES}`,
+	`${PAGE_URL.ME}`,
+	`${PAGE_URL.MOVIE_DETAIL}`, 
+	`${PAGE_URL.SEARCH}`,
+	`${PAGE_URL.POST}`
+];
+// 공개적인 페이지 (로그인 필요 X)
+const publicRoutes = [`${PAGE_URL.LOGIN}`,
+	`${PAGE_URL.SINGUP}`,
+	`${PAGE_URL.BASE}`];
+
+async function middleware(request: NextRequest) {
+	const cookieStore = cookies();
+	let accessToken = request.cookies.get('accessToken')?.value;
+	const refreshToken = request.cookies.get('refreshToken')?.value;
 	const pathUrl = request.nextUrl.pathname;
 
 	const requestHeaders = new Headers(request.headers);
@@ -10,6 +43,23 @@ function middleware(request: NextRequest) {
 
 	// accessToken 유무에 따른 로그인 상태 전달
 	if (accessToken) {
+		// TODO: 리프레시 토큰 처리하기
+		// 저장했던 refreshToken으로 새로운 accessToken 발급
+		if (isTokenExpiringSoon(accessToken) && refreshToken) {
+			try {
+			  const data = await getNewAccessToken(refreshToken);
+			  
+			  const accessToken = data.accessToken;
+			  const newRefreshToken = data.refreshToken;
+			  cookieStore.set('accessToken', accessToken);
+			  cookieStore.set('refreshToken', newRefreshToken);
+			} catch (error) {
+			  console.error('Failed to refresh access token:', error);
+			  requestHeaders.set('x-logged-in', 'false');
+				return NextResponse.redirect(new URL(`${PAGE_URL.BASE}`, request.url));
+			}
+		};
+
 		const authObject = {
 			'Content-Type': "application/json",
 			'Authorization': `Bearer ${accessToken}`
@@ -24,9 +74,14 @@ function middleware(request: NextRequest) {
 		requestHeaders.set('x-logged-in', 'false');
 	}
 
-	// 로그인되어있는 상태면 home으로 redirect
-	if (accessToken && pathUrl.startsWith(`${PAGE_URL.LOGIN}`)) {
+	// 로그인되어있는 상태에서 login, signup으로 접근 시, home page로 redirect
+	if (accessToken && (pathUrl.startsWith(`${PAGE_URL.LOGIN}`) || pathUrl.startsWith(`${PAGE_URL.SINGUP}`))) {
 		return NextResponse.redirect(new URL(`${PAGE_URL.BASE}`, request.url));
+	}
+
+	// 로그인 안 되어있는 상태에서 protectedRoutes로 접근 시, login page로 redirect
+	if (!accessToken && (protectedRoutes.includes(pathUrl))) {
+		return NextResponse.redirect(new URL(`${PAGE_URL.LOGIN}`, request.url));
 	}
 
 	return NextResponse.next({
@@ -34,10 +89,6 @@ function middleware(request: NextRequest) {
 			headers: requestHeaders,
 		}
 	});
-
-	// TODO: 로그인이 되어있는데 다른 페이지에 접근하려고 할 때 (마이페이지 등)
-
-	// TODO: 리프레시 토큰 처리하기
 }
 
 export default middleware;

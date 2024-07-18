@@ -33,6 +33,8 @@ async function create(formData: FormData) {
 			const refreshToken = responseData.refreshToken;
 			cookieStore.set('accessToken', accessToken);
 			cookieStore.set('refreshToken', refreshToken);
+
+			redirect(`${PAGE_URL.BASE}`);
 		} catch (e) {
 			console.error('로그인 실패: ', e);
 		}
