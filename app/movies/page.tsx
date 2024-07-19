@@ -1,14 +1,11 @@
 import Button from "@/components/common/Button";
 import { API_URL, PAGE_URL } from "@/constants/router";
-import { MovieType } from "@/types/data";
 import React from "react";
 import MoviePosterSlide from "@/components/movies/MoviePosterSlide";
 import Link from "next/link";
 import getHeaders from "@/utils/header";
 
-interface MoviesPageProps {
-   data: MovieType[];
-}
+interface MoviesPageProps {}
 
 async function MoviesPage({}: MoviesPageProps) {
 	const page = 1;

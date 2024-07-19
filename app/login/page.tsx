@@ -3,6 +3,7 @@ import Input from '@/components/common/Input';
 import { API_URL, PAGE_URL } from '@/constants/router';
 import { cookies, headers } from 'next/headers';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 // TODO: 로그인 후 redirect 처리
@@ -38,6 +39,8 @@ async function create(formData: FormData) {
 			console.error('로그인 실패: ', e);
 		}
 	}
+
+	redirect(`${PAGE_URL.BASE}`);
 };
 
 function LoginPage() {

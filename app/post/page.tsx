@@ -4,7 +4,8 @@ import Input from "@/components/common/Input";
 import TextInput from "@/components/common/TextInput";
 import { DatePicker } from "@nextui-org/date-picker";
 import { headers } from "next/headers";
-import { API_URL } from "@/constants/router";
+import { API_URL, PAGE_URL } from "@/constants/router";
+import { redirect } from "next/navigation";
 
 // TODO: post 이후 다른 페이지로 이동
 async function create(formData: FormData) {
@@ -45,6 +46,8 @@ async function create(formData: FormData) {
 		} catch (e) {
 			console.error(e);
 		}
+		// redirect는 try catch 문에 쓰면 안돼..
+		redirect(`${PAGE_URL.MOVIES}`);
 	}
 }
 

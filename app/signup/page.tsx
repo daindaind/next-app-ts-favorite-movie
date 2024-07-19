@@ -17,16 +17,15 @@ async function create(formData: FormData) {
 	};
 
 	try {
-		const res = await signup({
+		await signup({
 			email: String(data.email),
 			password: String(data.password)
 		});
-		if (res.status === 200) {
-			redirect(`${PAGE_URL.LOGIN}`);
-		}
 	} catch (e) {
 		console.error(e);
 	}
+
+	redirect(`${PAGE_URL.LOGIN}`);
 };
 
 function SignupPage() {

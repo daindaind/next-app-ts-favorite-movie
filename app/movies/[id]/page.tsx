@@ -12,7 +12,7 @@ interface MovieDetailPageProps {
 async function MovieDetailPage({params}: MovieDetailPageProps) {
 	const { id } = params;
 	const authorization = getHeaders();
-	let data: PostType = {};  // TODO: 타입에러 잡기
+	let data: PostType | null = null;  // TODO: 타입에러 잡기
 
 	try {
 		const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${API_URL.POSTS}/${id}`, {
