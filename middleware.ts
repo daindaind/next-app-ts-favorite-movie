@@ -32,7 +32,7 @@ const publicRoutes = [`${PAGE_URL.LOGIN}`,
 	`${PAGE_URL.BASE}`];
 
 async function middleware(request: NextRequest) {
-	// const cookieStore = cookies();
+	const response = NextResponse.next();
 	let accessToken = request.cookies.get('accessToken')?.value;
 	const refreshToken = request.cookies.get('refreshToken')?.value;
 	const pathUrl = request.nextUrl.pathname;
@@ -42,7 +42,6 @@ async function middleware(request: NextRequest) {
 
 	// accessToken 유무에 따른 로그인 상태 전달
 	if (accessToken) {
-		const response = NextResponse.redirect(request.url);
 
 		// accessToken이 만료되었을 때 리프레시 토큰 요청
 		// 저장했던 refreshToken으로 새로운 accessToken 발급
@@ -55,10 +54,11 @@ async function middleware(request: NextRequest) {
 
 			  const newAccessToken = data.accessToken;
 			  const newRefreshToken = data.refreshToken;
-				//   cookieStore.set('accessToken', newAccessToken);
-				//   cookieStore.set('refreshToken', newRefreshToken);
-				response.cookies.set('accessToken', newAccessToken);
-				response.cookies.set('refreshToken', newRefreshToken);
+			  response.cookies.set('accessToken', newAccessToken);
+			  response.cookies.set('refreshToken', newRefreshToken);
+
+			  requestHeaders.set('authorization', `Bearer ${newAccessToken}`);
+			  requestHeaders.set('x-logged-in', 'true');
 			} catch (error) {
 			  console.error('Failed to refresh access token:', error);
 			  requestHeaders.set('x-logged-in', 'false');
@@ -91,11 +91,18 @@ async function middleware(request: NextRequest) {
 		return NextResponse.redirect(new URL(`${PAGE_URL.LOGIN}`, request.url));
 	}
 
-	return NextResponse.next({
-		request: {
-			headers: requestHeaders,
-		}
-	});
+	// return NextResponse.next({
+	// 	request: {
+	// 		headers: requestHeaders,
+	// 	}
+	// });
+	// response의 헤더를 업데이트한 후 반환
+	const finalResponse = NextResponse.next();
+	finalResponse.headers.set('authorization', requestHeaders.get('authorization'));
+	finalResponse.headers.set('x-logged-in', requestHeaders.get('x-logged-in'));
+	finalResponse.headers.set('x-pathname', requestHeaders.get('x-pathname'));
+
+	return finalResponse;
 }
 
 export default middleware;

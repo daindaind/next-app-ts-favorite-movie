@@ -7,7 +7,7 @@ function SearchPage() {
 	const authorization = headersList.get('authorization');
 
 	return (
-		<div className='flex flex-col p-16 gap-10 h-screen'>
+		<div className='flex flex-col p-16 gap-10 h-ful'>
 			<div className='flex flex-col gap-1 ml-2'>
 				<h3 className="text-gray-08 font-light text-3xl">포스트 찾아보기</h3>
 				<h5 className="flex flex-wrap text-gray-08 font-light text-xl">나와 비슷한 생각이 담긴 포스트를 찾아보세요.</h5>
