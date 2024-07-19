@@ -3,12 +3,13 @@
 import { useEffect, useRef } from "react";
 
 interface TextInputProps {
-  name: string;
+  	name: string;
    placeholder: string;
    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+	defaultValue?: string;
 }
 
-const TextInput = ({ placeholder, onChange, name }: TextInputProps) => {
+const TextInput = ({ defaultValue, placeholder, onChange, name }: TextInputProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
 	const handleInput = () => {
@@ -37,7 +38,8 @@ const TextInput = ({ placeholder, onChange, name }: TextInputProps) => {
 			ref={textareaRef}
 			placeholder={placeholder}
 			onChange={onChange}
-		/>
+			defaultValue={defaultValue}
+		/> 
 	);
 };
 

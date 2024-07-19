@@ -1,3 +1,4 @@
+import PostMenuButton from "@/components/post/PostMenuButton";
 import { API_URL } from "@/constants/router";
 import { PostType } from "@/types/data";
 import getHeaders from "@/utils/header";
@@ -51,6 +52,7 @@ async function MovieDetailPage({params}: MovieDetailPageProps) {
 							{data.color && <div className={`w-[10px] h-[10px] bg-${data.color} rounded-full`} />}
 						</div>
 					</div>
+					<PostMenuButton authorization={authorization} id={data.id}/>
 				</div>
 				<div className="bg-stone-50 shadow-md p-6 rounded-xl mt-8">
 					<p className="bg-stone-50 text-sm text-default-text font-light whitespace-pre-line">{data.description}</p>

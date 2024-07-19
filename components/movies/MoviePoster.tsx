@@ -16,7 +16,7 @@ function MoviePoster({movieData, onClick}: MoviePosterProps) {
 				{movieData.images[0] && <Image alt="Poster" src={movieData.images[0].uri} className="bg-gray-08 rounded-md shadow-md" fill />}
 			</div>
 			<h5 className='flex mt-3 font-normal text-lg text-default-text'>{movieData?.title}</h5>
-			<p className='flex font-extralight text-xs text-default-text'>{movieData?.date}</p>
+			<p className='flex font-extralight text-xs text-default-text'>{String(movieData?.date)}</p>
 		</div>
 	);
 }

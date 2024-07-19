@@ -42,7 +42,6 @@ async function middleware(request: NextRequest) {
 
 	// accessToken 유무에 따른 로그인 상태 전달
 	if (accessToken) {
-
 		// accessToken이 만료되었을 때 리프레시 토큰 요청
 		// 저장했던 refreshToken으로 새로운 accessToken 발급
 		// 발급 받은 accessToken을 cookie에 저장
@@ -56,9 +55,6 @@ async function middleware(request: NextRequest) {
 			  const newRefreshToken = data.refreshToken;
 			  response.cookies.set('accessToken', newAccessToken);
 			  response.cookies.set('refreshToken', newRefreshToken);
-
-			  requestHeaders.set('authorization', `Bearer ${newAccessToken}`);
-			  requestHeaders.set('x-logged-in', 'true');
 			} catch (error) {
 			  console.error('Failed to refresh access token:', error);
 			  requestHeaders.set('x-logged-in', 'false');
@@ -96,13 +92,13 @@ async function middleware(request: NextRequest) {
 	// 		headers: requestHeaders,
 	// 	}
 	// });
+	
 	// response의 헤더를 업데이트한 후 반환
-	const finalResponse = NextResponse.next();
-	finalResponse.headers.set('authorization', requestHeaders.get('authorization'));
-	finalResponse.headers.set('x-logged-in', requestHeaders.get('x-logged-in'));
-	finalResponse.headers.set('x-pathname', requestHeaders.get('x-pathname'));
+	response.headers.set('authorization', requestHeaders.get('authorization'));
+	response.headers.set('x-logged-in', requestHeaders.get('x-logged-in'));
+	response.headers.set('x-pathname', requestHeaders.get('x-pathname'));
 
-	return finalResponse;
+	return response;
 }
 
 export default middleware;

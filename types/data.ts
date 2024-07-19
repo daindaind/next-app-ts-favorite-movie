@@ -1,3 +1,4 @@
+import { DateValue } from "@nextui-org/react";
 import { COLOR_DTO, IMAGE_DTO } from "./dto";
 
 export type MovieType = {
@@ -13,14 +14,14 @@ export type MovieType = {
 
 export type PostType = {
    id: number;
-   latitude: number;
-   longitude: number;
+   latitude: string;
+   longitude: string;
    color: COLOR_DTO;
    address: string;
    title: string;
    description: string;
-   date: string;
-   score: number;
+   date: DateValue;
+   score: string;
    createdAt: string;
    updatedAt: string;
    deletedAt: string;
