@@ -28,7 +28,7 @@ async function MyPage() {
 	}
 
 	return (
-		<div className='flex flex-col h-screen p-20'>
+		<div className='flex flex-col h-screen p-20 gap-16'>
 			<div className='flex flex-row gap-5 items-center'>
 				<div className='relative w-[100px] h-[100px]'>
 					<Image alt='profileImg' fill src={userData?.imageUri ? userData?.imageUri : profile} className='rounded-full absolute object-cover border'/>
@@ -38,7 +38,7 @@ async function MyPage() {
 					<Button label='수정하기' />
 				</Link>
 			</div>
-			<div className='grid grid-cols-2 gap-16 mt-16'>
+			<div className='grid grid-cols-2 gap-16'>
 				<div className='flex flex-col gap-2'>
 					<h2 className='text-sm text-gray-05'>이메일</h2>
 					<p className='text-lg font-light text-gray-08'>{userData?.email}</p>
@@ -55,6 +55,18 @@ async function MyPage() {
 					<h2 className='text-sm text-gray-05'>로그인 타입</h2>
 					<p className='text-lg font-light text-gray-08'>{userData?.loginType}</p>
 				</div>
+			</div>
+			<div className='flex flex-col gap-5 items-start'>
+				<Link href={`${PAGE_URL.REVOKE}`}>
+					<h2 className='text-lg font-semibold text-gray08'>
+						탈퇴하기
+					</h2>
+				</Link>
+				<Link href={`${PAGE_URL.LOGOUT}`}>
+					<h2 className='text-lg font-semibold text-gray08'>
+						로그아웃
+					</h2>
+				</Link>
 			</div>
 		</div>
 	);

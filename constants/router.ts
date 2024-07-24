@@ -7,7 +7,9 @@ const PAGE_URL = {
 	SINGUP: '/signup',
 	ME: '/me',
 	SEARCH: '/search',
-	ME_EDIT: '/me/edit'
+	ME_EDIT: '/me/edit',
+	LOGOUT: '/me/logout',
+	REVOKE: '/me/revoke'
 };
 
 const BASE_URL = {
