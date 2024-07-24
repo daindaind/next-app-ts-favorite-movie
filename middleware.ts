@@ -87,6 +87,8 @@ async function middleware(request: NextRequest) {
 		return NextResponse.redirect(new URL(`${PAGE_URL.LOGIN}`, request.url));
 	}
 
+	// 위에서 쿠키를 넣어두고, 이렇게 새로운 response를 반환하니까
+	// 쿠키 반영이 안됨
 	// return NextResponse.next({
 	// 	request: {
 	// 		headers: requestHeaders,

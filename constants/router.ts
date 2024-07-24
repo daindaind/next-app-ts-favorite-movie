@@ -6,7 +6,8 @@ const PAGE_URL = {
 	LOGIN: '/login',
 	SINGUP: '/signup',
 	ME: '/me',
-	SEARCH: '/search'
+	SEARCH: '/search',
+	ME_EDIT: '/me/edit'
 };
 
 const BASE_URL = {
