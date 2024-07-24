@@ -23,7 +23,7 @@ async function MoviesPage({}: MoviesPageProps) {
 		console.error(e);
 	}
 
-	console.log(authorization);
+	console.log(movieData);
    
 	return (
 		<div className="flex flex-col justify-center items-center mt-10 pb-[100px]">
@@ -34,6 +34,12 @@ async function MoviesPage({}: MoviesPageProps) {
 					<Button label="Post Your Movies"/>
 				</Link>
 			</div>
+			{movieData.length <= 0 && (
+				<div className="flex flex-col gap-1 items-center">
+					<p className="text-lg font-normal text-gray-01 ml-6">아직 작성한 포스팅이 없습니다.</p>
+					<p className="text-lg font-normal text-gray-01 ml-6">위 버튼을 눌러 포스트를 작성해보세요!</p>	
+				</div>
+			)}
 			<MoviePosterSlide movieData={movieData}/>
 		</div>
 	);
