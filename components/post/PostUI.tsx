@@ -33,7 +33,7 @@ const PostUI = () => {
 	};
 
 	return (
-		<div className="flex flex-col gap-7 w-4/5 self-center">
+		<div className="flex flex-col gap-7 w-4/5 self-cente">
 			<h2 className="text-default-text text-3xl font-light">당신이 좋아하는 작품을 공유해주세요.</h2>
 			<div className="flex flex-col gap-3 w-full">
 				<p className="text-gray-01 text-sm font-normal">위도</p>
@@ -92,16 +92,17 @@ const PostUI = () => {
 				{imgUrl ? (
 					<Image className="object-cover bg-white rounded-md" width={250} height={360} alt="Poster" src={imgUrl} />
 				) : (
-					<div className="flex flex-col align-middle justify-center w-[250px] h-[360px] bg-white rounded-md" >
+					<div className="flex flex-col align-middle justify-center w-[250px] h-[360px] bg-slate-50 rounded-md" >
 						<MdOutlinePhoto className="self-center" color="#838d9b" size={40} />
 					</div>
 				)}
 				<div>
 					<input 
+						name="imageUri"
 						type="file"
 						accept="image/*"
 						onChange={insertImg}
-						className='flex-none'
+						className='hidden'
 						ref={fileInput}
 					/>
 					<Button 

@@ -39,7 +39,7 @@ async function create(formData: FormData) {
 
 async function UserEditPage() {
 	return (
-		<form className='h-[80%] flex flex-col justify-center gap-10 p-20' action={create}>
+		<form className='h-screen flex flex-col justify-center gap-10 p-20' action={create}>
 			<UserEdit />
 		</form>
 	);

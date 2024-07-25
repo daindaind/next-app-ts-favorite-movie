@@ -20,7 +20,7 @@ export type PostType = {
    address: string;
    title: string;
    description: string;
-   date: DateValue;
+   date: string;
    score: string;
    createdAt: string;
    updatedAt: string;

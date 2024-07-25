@@ -1,14 +1,15 @@
 import React from "react";
 import { headers } from "next/headers";
 import { API_URL, PAGE_URL } from "@/constants/router";
-import { redirect } from "next/navigation";
 import PostUI from "@/components/post/PostUI";
+import { redirect } from "next/navigation";
 
 // TODO: post 이후 다른 페이지로 이동
 async function create(formData: FormData) {
 	'use server';
 	const headersList = headers();
 	const authorization = headersList.get('authorization');
+	let imageUri = '';
 
 	const postData = {
 		latitude: formData.get('latitude'),
@@ -19,10 +20,35 @@ async function create(formData: FormData) {
 		description: formData.get('description'),
 		date: formData.get('date'),
 		score: formData.get('score'),
-		imageUris: formData.get('imageUrls'),
+		imageUri: formData.get('imageUri'),
 	};
 
-	if (postData && authorization) {
+	// console.log(postData);
+
+	if (postData?.imageUri && authorization) {
+		console.log(JSON.parse(authorization)["Authorization"]);
+
+		const imageFormData = new FormData();
+		imageFormData.append(`images`, postData?.imageUri);
+
+		try {
+			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${API_URL.IMAGE}`, {
+				method: 'POST',
+				headers: { 'Authorization': JSON.parse(authorization)["Authorization"] },
+				body: imageFormData
+			});
+			
+			if (res.ok) {
+				const data = await res.json();
+				imageUri = data[0];
+				console.log('presigned url: ', data);
+			}
+		} catch (e) {
+			console.error(e);
+		}
+	}
+	
+	if (postData && authorization && imageUri) {
 		try {
 			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${API_URL.POSTS}`, {
 				method: 'POST',
@@ -36,7 +62,8 @@ async function create(formData: FormData) {
 					description: String(postData.description),
 					date: String(postData.date),
 					score: Number(postData.score),
-					imageUris: [],  // TODO: 실제 url 리스트 필요
+					// imageUris: Array(imageUri),
+					imageUris: []
 				})
 			});
 			console.log(res);

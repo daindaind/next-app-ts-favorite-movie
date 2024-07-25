@@ -15,7 +15,8 @@ const PAGE_URL = {
 const BASE_URL = {
 	AUTH: 'auth',
 	MARKERS: 'markers',
-	POSTS: 'posts'
+	POSTS: 'posts',
+	IMAGE: 'image'
 };
  
 const API_URL = {
@@ -33,7 +34,10 @@ const API_URL = {
 	GET_MARKERS: `${BASE_URL.MARKERS}/my`,
 	MY_POSTS: `${BASE_URL.POSTS}/my`,
 	POSTS: `${BASE_URL.POSTS}`,
-	POSTS_SEARCH: `${BASE_URL.POSTS}/my/search`
+	POSTS_SEARCH: `${BASE_URL.POSTS}/my/search`,
+
+	// image
+	IMAGE: `${BASE_URL.IMAGE}`,
 };
  
 export { PAGE_URL, API_URL };
