@@ -5,7 +5,7 @@ import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import profile from "/public/images/profile.jpg"
+import profile from "/public/images/profile.jpg";
 
 async function MyPage() {
 	const headersList = headers();

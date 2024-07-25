@@ -1,5 +1,5 @@
 const MypageModalDefaultPage = () => {
-  return null;
-}
+	return null;
+};
 
-export default MypageModalDefaultPage
+export default MypageModalDefaultPage;

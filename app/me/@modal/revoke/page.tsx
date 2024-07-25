@@ -1,13 +1,13 @@
-import RevokeModalUI from '@/components/mypage/RevokeModalUI'
-import ModalBackdrop from '@/components/post/ModalBackdrop'
-import React from 'react'
+import RevokeModalUI from '@/components/mypage/RevokeModalUI';
+import ModalBackdrop from '@/components/post/ModalBackdrop';
+import React from 'react';
 
 const RevokeModal = () => {
-  return (
-    <ModalBackdrop>
-      <RevokeModalUI />
-    </ModalBackdrop>
-  )
-}
+	return (
+		<ModalBackdrop>
+			<RevokeModalUI />
+		</ModalBackdrop>
+	);
+};
 
-export default RevokeModal
+export default RevokeModal;

@@ -3,11 +3,11 @@ import ModalBackdrop from '@/components/post/ModalBackdrop';
 import React from 'react';
 
 const LogoutModal = () => {
-  return (
-    <ModalBackdrop>
-      <LogoutModalUI />
-    </ModalBackdrop>
-  )
-}
+	return (
+		<ModalBackdrop>
+			<LogoutModalUI />
+		</ModalBackdrop>
+	);
+};
 
-export default LogoutModal
+export default LogoutModal;

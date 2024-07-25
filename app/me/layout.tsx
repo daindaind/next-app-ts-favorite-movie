@@ -6,12 +6,12 @@ interface MyPageLayoutProps {
 }
 
 const MyPageLayout = ({ children, modal }: MyPageLayoutProps) => {
-  return (
-      <>
-         {modal}
-         {children}
-      </>
-  )
-}
+	return (
+		<>
+			{modal}
+			{children}
+		</>
+	);
+};
 
-export default MyPageLayout
+export default MyPageLayout;

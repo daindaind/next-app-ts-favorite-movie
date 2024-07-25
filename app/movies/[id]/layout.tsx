@@ -9,12 +9,12 @@ interface MovieDetailLayoutProps {
 // modal이 children 위에 위치한다.
 function MovieDetailLayout({children, modal}: MovieDetailLayoutProps) {
 
-  return (
-    <>
-      {modal}
-      {children}
-    </>
-  )
+	return (
+		<>
+			{modal}
+			{children}
+		</>
+	);
 }
 
-export default MovieDetailLayout
+export default MovieDetailLayout;

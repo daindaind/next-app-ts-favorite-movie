@@ -1,5 +1,5 @@
 function ImageModalDefaultPage() {
-   return null;
+	return null;
 }
 
-export default ImageModalDefaultPage
+export default ImageModalDefaultPage;
