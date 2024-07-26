@@ -25,6 +25,13 @@ const nextConfig = {
 				// ** : 아무거나 올 수 있음
 				pathname: "/**",
 			},
+			{
+				protocol: "http",
+				hostname: "localhost",
+				port: "3000",
+				// ** : 아무거나 올 수 있음
+				pathname: "/**",
+			},
 		],
 	},
 };

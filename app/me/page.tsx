@@ -31,7 +31,7 @@ async function MyPage() {
 		<div className='flex flex-col h-screen p-20 gap-16'>
 			<div className='flex flex-row gap-5 items-center'>
 				<div className='relative w-[100px] h-[100px]'>
-					<Image alt='profileImg' fill src={userData?.imageUri ? userData?.imageUri : profile} className='rounded-full absolute object-cover border'/>
+					<Image alt='profileImg' fill src={userData?.imageUri ? `${process.env.NEXT_PUBLIC_API_URL}/${userData?.imageUri}` : profile} className='rounded-full absolute object-cover border'/>
 				</div>
 				<h3 className='text-xl font-semibold text-gray-07'>{userData?.nickname || '아직 닉네임을 설정하지 않았어요.'}</h3>
 				<Link href={`${PAGE_URL.ME_EDIT}`}>

@@ -23,11 +23,7 @@ async function create(formData: FormData) {
 		imageUri: formData.get('imageUri'),
 	};
 
-	// console.log(postData);
-
 	if (postData?.imageUri && authorization) {
-		console.log(JSON.parse(authorization)["Authorization"]);
-
 		const imageFormData = new FormData();
 		imageFormData.append(`images`, postData?.imageUri);
 
@@ -47,7 +43,9 @@ async function create(formData: FormData) {
 			console.error(e);
 		}
 	}
-	
+
+	const imageList = [{uri : imageUri}];
+
 	if (postData && authorization && imageUri) {
 		try {
 			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${API_URL.POSTS}`, {
@@ -62,8 +60,7 @@ async function create(formData: FormData) {
 					description: String(postData.description),
 					date: String(postData.date),
 					score: Number(postData.score),
-					// imageUris: Array(imageUri),
-					imageUris: []
+					imageUris: imageList,
 				})
 			});
 			console.log(res);
