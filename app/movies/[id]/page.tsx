@@ -34,11 +34,12 @@ async function MovieDetailPage({params}: MovieDetailPageProps) {
 		<article className="flex flex-col align-middle m-5 gap-10 h-screen p-10">
 			<header className="flex flex-col self-center w-4/5">
 				<div className="flex flex-row gap-5">
-					<Link href={`/movies/${data.id}/image/${data.images[0].uri}`}>
-						{data.images[0] ? 
+					{data.images[0] ? (
+						<Link href={`/movies/${data.id}/image/${data.images[0].uri}`}>
 							<Image src={`${process.env.NEXT_PUBLIC_API_URL}/${data.images[0].uri}`} width={250} height={360} alt="Poster" className="bg-gray-08 rounded-md shadow-md" /> 
-							: <div className="w-[250px] h-[360px] bg-gray-01 rounded-md"></div>}
-					</Link>
+						</Link>
+					)
+						: <div className="w-[250px] h-[360px] bg-gray-01 rounded-md"></div>}
 					<div className="flex flex-col gap-3">
 						<p className=" inline-block text-2xl text-default-text font-bold p-1">{data.title}</p>
 						<p className=" inline-block text-sm text-default-text p-1">{data.date}</p>

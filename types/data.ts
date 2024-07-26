@@ -1,4 +1,3 @@
-import { DateValue } from "@nextui-org/react";
 import { COLOR_DTO, IMAGE_DTO } from "./dto";
 
 export type MovieType = {

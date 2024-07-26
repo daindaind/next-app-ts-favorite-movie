@@ -47,20 +47,10 @@ async function update(formData: FormData) {
 		}
 	}
 
+	const imageList = [{uri : imageUri}];
+
 	// 데이터 수정 요청
 	if (postData && authorization && imageUri) {
-		console.log(JSON.stringify({
-			latitude: String(postData.latitude),
-			longitude: String(postData.longitude),
-			color: String(postData.color),
-			address: String(postData.address),
-			title: String(postData.title),
-			description: String(postData.description),
-			date: String(postData.date),
-			score: Number(postData.score),
-			// imageUris: Array(imageUri),
-			imageUris: []
-		}));
 		try {
 			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${API_URL.POSTS}/${id}`, {
 				method: 'PATCH',
@@ -72,10 +62,8 @@ async function update(formData: FormData) {
 					address: String(postData.address),
 					title: String(postData.title),
 					description: String(postData.description),
-					date: String(postData.date),
 					score: Number(postData.score),
-					// imageUris: Array(imageUri),
-					imageUris: []
+					imageUris: imageList,
 				})
 			});
 			console.log(res);
@@ -114,7 +102,7 @@ async function PostUpdatePage({params}: PostUpdatePageProps) {
 
 	return (
 		<form className="flex flex-col align-middle justify-center gap-7 p-7 pb-[100px]" action={update}>
-			<PostUpdate data={data} />
+			{data && <PostUpdate data={data} />}
 		</form>
 	);
 }

@@ -8,6 +8,7 @@ import Button from '../common/Button';
 import { PostType } from '@/types/data';
 import Image from 'next/image';
 import { MdOutlinePhoto } from 'react-icons/md';
+import { CalendarDate } from '@nextui-org/react';
 
 interface PostUpdateProps {
    data: PostType | null;
@@ -19,7 +20,7 @@ function PostUpdate({ data }: PostUpdateProps) {
 
 	useEffect(() => {
 		if (data?.images.length) {
-			setImgUrl(data?.images[0].uri);
+			setImgUrl(`${process.env.NEXT_PUBLIC_API_URL}/${data?.images[0]?.uri}`);
 		}
 	}, [data]);
 
@@ -78,14 +79,14 @@ function PostUpdate({ data }: PostUpdateProps) {
 					defaultValue={data?.color}
 				/>
 			</div>
-			<div className="flex flex-col gap-3 w-full">
+			{/* <div className="flex flex-col gap-3 w-full">
 				<p className="text-gray-01 text-sm font-normal">날짜</p>
-				<DatePicker 
+				<DatePicker
 					name='date'
 					label="Birth date" 
 					className="max-w-[284px] rounded-md border-2 border-stone-200 p-2 text-sm text-gray-04" 
 				/>
-			</div>
+			</div> */}
 			<div className="flex flex-col gap-3 w-full">
 				<p className="text-gray-01 text-sm font-normal">제목</p>
 				<Input
