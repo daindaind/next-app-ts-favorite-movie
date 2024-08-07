@@ -23,6 +23,8 @@ async function create(formData: FormData) {
 		imageUri: formData.get('imageUri'),
 	};
 
+	console.log('adress', postData.address);
+
 	if (postData?.imageUri && authorization) {
 		const imageFormData = new FormData();
 		imageFormData.append(`images`, postData?.imageUri);
@@ -68,7 +70,7 @@ async function create(formData: FormData) {
 			console.error(e);
 		}
 		// redirect는 try catch 문에 쓰면 안돼..
-		redirect(`${PAGE_URL.MOVIES}`);
+		// redirect(`${PAGE_URL.MOVIES}`);
 	}
 }
 

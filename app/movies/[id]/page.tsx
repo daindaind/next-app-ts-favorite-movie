@@ -1,3 +1,4 @@
+import KakaoMap from "@/components/common/KakaoMap";
 import PostMenuButton from "@/components/post/PostMenuButton";
 import { API_URL } from "@/constants/router";
 import { PostType } from "@/types/data";
@@ -57,6 +58,9 @@ async function MovieDetailPage({params}: MovieDetailPageProps) {
 				</div>
 				<div className="bg-stone-50 shadow-md p-6 rounded-xl mt-8">
 					<p className="bg-stone-50 text-sm text-default-text font-light whitespace-pre-line">{data.description}</p>
+				</div>
+				<div className="w-full h-[400px] mt-5">
+					<KakaoMap lat={parseFloat(data?.latitude)} lng={parseFloat(data?.longitude)} />
 				</div>
 			</header>
 		</article>
